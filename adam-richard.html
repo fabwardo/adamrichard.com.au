@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Adam Richard — Comedian, Writer, Podcaster</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0c0b09;
+    --paper: #f7f2eb;
+    --warm: #e8dfd0;
+    --gold: #b8874a;
+    --gold-light: #d4a96a;
+    --muted: #7a7060;
+    --serif: 'Cormorant Garamond', Georgia, serif;
+    --sans: 'Outfit', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ink);
+    color: var(--paper);
+    font-family: var(--sans);
+    font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; justify-content: space-between; align-items: center;
+    padding: 1.5rem 3rem;
+    background: linear-gradient(to bottom, rgba(12,11,9,0.9), transparent);
+    backdrop-filter: blur(2px);
+  }
+
+  .nav-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-weight: 400;
+    letter-spacing: 0.08em;
+    color: var(--paper);
+    text-decoration: none;
+  }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--paper);
+    text-decoration: none;
+    opacity: 0.6;
+    transition: opacity 0.3s;
+  }
+  .nav-links a:hover { opacity: 1; }
+
+  /* ── HERO ── */
+  #hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 6rem 3rem 5rem;
+    position: relative; z-index: 2;
+  }
+
+  .hero-eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.3s;
+  }
+
+  .hero-name {
+    font-family: var(--serif);
+    font-size: clamp(4rem, 6.5vw, 7rem);
+    font-weight: 300;
+    line-height: 0.95;
+    letter-spacing: -0.02em;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.5s;
+  }
+
+  .hero-name em {
+    font-style: italic;
+    color: var(--gold-light);
+  }
+
+  .hero-tagline {
+    margin-top: 2rem;
+    font-size: 1rem;
+    font-weight: 300;
+    color: rgba(247,242,235,0.6);
+    line-height: 1.7;
+    max-width: 34ch;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.7s;
+  }
+
+  .hero-ctas {
+    margin-top: 2.5rem;
+    display: flex; gap: 1rem; flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 0.9s;
+  }
+
+  .hero-right {
+    position: relative;
+    overflow: hidden;
+    background: linear-gradient(160deg, #1e1a14 0%, #2a2318 50%, #181410 100%);
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse at 60% 40%, rgba(184,135,74,0.15) 0%, transparent 60%),
+      radial-gradient(ellipse at 20% 80%, rgba(184,135,74,0.07) 0%, transparent 40%);
+  }
+
+  .hero-img-label {
+    position: absolute; bottom: 2rem; left: 50%; transform: translateX(-50%);
+    font-family: var(--serif);
+    font-size: 0.75rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.18);
+    white-space: nowrap;
+  }
+
+  .hero-scroll {
+    position: absolute; bottom: 2rem; left: 3rem;
+    display: flex; align-items: center; gap: 1rem;
+    opacity: 0;
+    animation: fadeUp 1s ease forwards 1.1s;
+  }
+
+  .hero-scroll span {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .scroll-line {
+    width: 40px; height: 1px;
+    background: var(--gold);
+    animation: growLine 1.5s ease forwards 1.4s;
+    transform-origin: left; transform: scaleX(0);
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    width: 100%; height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(184,135,74,0.25), transparent);
+  }
+
+  /* ── SHARED ── */
+  section { padding: 7rem 3rem; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.9rem;
+  }
+
+  .section-title {
+    font-family: var(--serif);
+    font-size: clamp(2.8rem, 4.5vw, 4.5rem);
+    font-weight: 300;
+    line-height: 1.05;
+    margin-bottom: 3rem;
+  }
+
+  .section-title em { font-style: italic; color: var(--gold-light); }
+
+  /* ── ABOUT ── */
+  #about {
+    background: var(--paper);
+    color: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1.2fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  #about .section-label { color: var(--gold); }
+  #about .section-title em { color: var(--gold); }
+
+  .about-quote {
+    font-family: var(--serif);
+    font-size: clamp(1.5rem, 2.2vw, 2.2rem);
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.45;
+    color: #2a2218;
+    border-left: 2px solid var(--gold);
+    padding-left: 2rem;
+  }
+
+  .about-details {
+    margin-top: 2.5rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+  }
+
+  .detail-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.3rem;
+  }
+
+  .detail-value { font-size: 0.88rem; color: var(--ink); line-height: 1.5; }
+
+  .about-body {
+    font-size: 1.05rem;
+    line-height: 1.85;
+    color: #3a3228;
+  }
+
+  .about-body p + p { margin-top: 1.5rem; }
+
+  /* ── WORK ── */
+  #work { background: var(--ink); }
+
+  .work-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5px;
+    margin-top: 0.5rem;
+  }
+
+  .work-item {
+    position: relative;
+    overflow: hidden;
+    cursor: default;
+    min-height: 240px;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 1.5rem;
+    transition: transform 0.5s ease;
+  }
+
+  .work-item:hover { transform: scale(1.02); z-index: 2; }
+
+  .work-item::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: inherit;
+    z-index: 0;
+  }
+
+  .work-item::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+    z-index: 1;
+  }
+
+  .work-item:nth-child(1) { background: linear-gradient(135deg, #1c1810 0%, #2e2410 100%); }
+  .work-item:nth-child(2) { background: linear-gradient(135deg, #10181c 0%, #0f2030 100%); }
+  .work-item:nth-child(3) { background: linear-gradient(135deg, #1c1028 0%, #28103c 100%); }
+  .work-item:nth-child(4) { background: linear-gradient(135deg, #101c14 0%, #0e2818 100%); }
+  .work-item:nth-child(5) { background: linear-gradient(135deg, #1c1010 0%, #2e1414 100%); }
+  .work-item:nth-child(6) { background: linear-gradient(135deg, #181818 0%, #282828 100%); }
+
+  .work-item:first-child {
+    grid-column: span 2;
+    min-height: 380px;
+  }
+
+  .work-cat {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.4rem;
+    position: relative; z-index: 2;
+  }
+
+  .work-title {
+    font-family: var(--serif);
+    font-size: 1.5rem;
+    font-weight: 300;
+    position: relative; z-index: 2;
+    line-height: 1.2;
+  }
+
+  .work-item:first-child .work-title { font-size: 2.2rem; }
+
+  .work-desc {
+    font-size: 0.78rem;
+    color: rgba(255,255,255,0.5);
+    margin-top: 0.35rem;
+    line-height: 1.5;
+    position: relative; z-index: 2;
+  }
+
+  /* ── CREDITS ── */
+  #credits { background: #100f0c; }
+
+  .credits-cols {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3rem;
+    margin-top: 0.5rem;
+  }
+
+  .credits-col h3 {
+    font-size: 0.65rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 1px solid rgba(184,135,74,0.2);
+  }
+
+  .credit-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.05);
+    gap: 1rem;
+  }
+
+  .credit-name {
+    font-family: var(--serif);
+    font-size: 1.05rem;
+    font-weight: 300;
+    line-height: 1.3;
+  }
+
+  .credit-year {
+    font-size: 0.65rem;
+    color: var(--muted);
+    white-space: nowrap;
+    letter-spacing: 0.05em;
+  }
+
+  .credit-role {
+    font-size: 0.72rem;
+    color: var(--muted);
+    margin-top: 0.15rem;
+  }
+
+  /* ── PODCASTS ── */
+  #podcasts {
+    background: var(--paper);
+    color: var(--ink);
+  }
+
+  #podcasts .section-label { color: var(--gold); }
+  #podcasts .section-title em { color: var(--gold); }
+
+  .podcast-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+
+  @media (max-width: 768px) {
+    .podcast-grid { grid-template-columns: 1fr; }
+  }
+
+  .podcast-card {
+    padding: 2.5rem;
+    border: 1px solid rgba(12,11,9,0.1);
+    position: relative;
+    transition: border-color 0.3s;
+  }
+
+  .podcast-card:hover { border-color: var(--gold); }
+
+  .podcast-num {
+    font-family: var(--serif);
+    font-size: 3.5rem;
+    font-weight: 300;
+    color: rgba(184,135,74,0.15);
+    position: absolute;
+    top: 1.5rem; right: 2rem;
+    line-height: 1;
+  }
+
+  .podcast-tag {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 0.75rem;
+  }
+
+  .podcast-title {
+    font-family: var(--serif);
+    font-size: 1.6rem;
+    font-weight: 300;
+    color: var(--ink);
+    margin-bottom: 0.75rem;
+    line-height: 1.2;
+  }
+
+  .podcast-desc {
+    font-size: 0.88rem;
+    color: #4a4238;
+    line-height: 1.7;
+  }
+
+  .podcast-link {
+    display: inline-block;
+    margin-top: 1.5rem;
+    font-size: 0.68rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--gold);
+    text-decoration: none;
+    border-bottom: 1px solid rgba(184,135,74,0.3);
+    padding-bottom: 0.2rem;
+    transition: border-color 0.3s;
+  }
+
+  .podcast-link:hover { border-color: var(--gold); }
+
+  /* ── CONTACT ── */
+  #contact {
+    background: var(--ink);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: start;
+  }
+
+  .contact-intro {
+    font-size: 1rem;
+    color: rgba(247,242,235,0.6);
+    line-height: 1.8;
+    max-width: 36ch;
+    margin-bottom: 2.5rem;
+  }
+
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+
+  .contact-link {
+    display: flex; align-items: center; gap: 1.5rem;
+    text-decoration: none;
+    color: var(--paper);
+    transition: color 0.3s;
+  }
+
+  .contact-link:hover { color: var(--gold); }
+
+  .contact-link-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    width: 72px;
+    flex-shrink: 0;
+  }
+
+  .contact-link-value { font-size: 0.9rem; }
+
+  .contact-form { display: flex; flex-direction: column; gap: 1.5rem; }
+
+  .form-group { display: flex; flex-direction: column; gap: 0.5rem; }
+
+  .form-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .form-input, .form-textarea {
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(247,242,235,0.15);
+    padding: 0.75rem 0;
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    font-weight: 300;
+    color: var(--paper);
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+
+  .form-input:focus, .form-textarea:focus { border-bottom-color: var(--gold); }
+  .form-input::placeholder, .form-textarea::placeholder {
+    color: rgba(247,242,235,0.2);
+    font-style: italic;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.75rem;
+    padding: 0.85rem 2rem;
+    font-family: var(--sans);
+    font-size: 0.68rem;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    border: none;
+  }
+
+  .btn-gold {
+    background: var(--gold);
+    color: var(--ink);
+  }
+  .btn-gold:hover { background: var(--gold-light); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--paper);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+  .btn-outline:hover { background: var(--gold); color: var(--ink); border-color: var(--gold); }
+
+  .btn-outline-dark {
+    background: transparent;
+    color: var(--ink);
+    border: 1px solid rgba(12,11,9,0.25);
+  }
+  .btn-outline-dark:hover { background: var(--ink); color: var(--paper); }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #080806;
+    padding: 2.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(255,255,255,0.05);
+  }
+
+  .footer-name {
+    font-family: var(--serif);
+    font-size: 1.1rem;
+    font-style: italic;
+    color: rgba(255,255,255,0.3);
+  }
+
+  .footer-copy {
+    font-size: 0.62rem;
+    letter-spacing: 0.15em;
+    color: rgba(255,255,255,0.15);
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes growLine {
+    to { transform: scaleX(1); }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.85s ease, transform 0.85s ease;
+  }
+
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── MOBILE ── */
+  @media (max-width: 768px) {
+    nav { padding: 1.2rem 1.5rem; }
+    .nav-links { display: none; }
+
+    #hero { grid-template-columns: 1fr; }
+    .hero-left { padding: 5rem 1.5rem 4rem; }
+    .hero-right { display: none; }
+
+    section { padding: 5rem 1.5rem; }
+
+    #about, #contact { grid-template-columns: 1fr; gap: 3rem; }
+    .about-details { grid-template-columns: 1fr 1fr; }
+
+    .work-grid { grid-template-columns: 1fr 1fr; }
+    .work-item:first-child { grid-column: span 2; min-height: 260px; }
+    .work-item:first-child .work-title { font-size: 1.6rem; }
+
+    .credits-cols { grid-template-columns: 1fr; gap: 2rem; }
+
+    .podcast-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#hero" class="nav-name">Adam Richard</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#showreel">Showreel</a></li>
+    <li><a href="#work">Work</a></li>
+    <li><a href="#credits">Credits</a></li>
+    <li><a href="#podcasts">Podcasts</a></li>
+    <li><a href="#stories">Writing</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Comedian · Writer · Podcaster · Media Personality</p>
+    <h1 class="hero-name">Adam<br><em>Richard</em></h1>
+    <p class="hero-tagline">Stand-up comedian, writer, radio presenter, podcast host, and occasional contestant on shows involving swimming pools. Fabulous since 1997.</p>
+    <div class="hero-ctas">
+      <a href="#work" class="btn btn-gold">See the work</a>
+      <a href="#contact" class="btn btn-outline">Get in touch</a>
+    </div>
+    <div class="hero-scroll">
+      <div class="scroll-line"></div>
+      <span>Scroll</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <p class="hero-img-label">Add your photo here</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- SHOWREEL -->
+<section id="showreel" style="background: #0a0907;">
+  <p class="section-label reveal">Writing Showreel</p>
+  <h2 class="section-title reveal">The work,<br><em>produced</em></h2>
+
+  <div class="reveal" style="max-width: 900px; margin: 0 auto;">
+    <!-- Replace the src below with your actual video URL (YouTube embed, Vimeo, or a hosted mp4) -->
+    <div style="position:relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #1a1710;">
+      <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1rem;">
+        <p style="font-family:var(--serif);font-size:1.8rem;font-style:italic;color:rgba(255,255,255,0.15);">Showreel coming soon</p>
+        <p style="font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(184,135,74,0.4);">Replace this div with your video embed</p>
+      </div>
+      <!-- EXAMPLE: uncomment and paste your YouTube embed ID below -->
+      <!-- <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"
+        src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen></iframe> -->
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:2rem;margin-top:3rem;">
+      <div style="border-top:1px solid rgba(184,135,74,0.2);padding-top:1.25rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">ABC TV</p>
+        <p style="font-family:var(--serif);font-size:1.1rem;font-weight:300;">Hard Quiz</p>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.25rem;">Series 2–10 · 2017–2024</p>
+      </div>
+      <div style="border-top:1px solid rgba(184,135,74,0.2);padding-top:1.25rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">ABC TV</p>
+        <p style="font-family:var(--serif);font-size:1.1rem;font-weight:300;">Outland</p>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.25rem;">Co-writer & Co-star · 2012</p>
+      </div>
+      <div style="border-top:1px solid rgba(184,135,74,0.2);padding-top:1.25rem;">
+        <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.5rem;">ABC TV</p>
+        <p style="font-family:var(--serif);font-size:1.1rem;font-weight:300;">Sydney Mardi Gras</p>
+        <p style="font-size:0.78rem;color:var(--muted);margin-top:0.25rem;">Writer · 2025</p>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="about">
+  <div>
+    <p class="section-label reveal">About</p>
+    <h2 class="section-title reveal">Fabulous<br>since <em>'97</em></h2>
+    <blockquote class="about-quote reveal">"I got into stand-up to change the way comics talked about gay people on stage. Cheap laughs weren't good enough."</blockquote>
+    <div class="about-details reveal">
+      <div>
+        <p class="detail-label">Based in</p>
+        <p class="detail-value">Sydney, Australia</p>
+      </div>
+      <div>
+        <p class="detail-label">Stand-up since</p>
+        <p class="detail-value">1997</p>
+      </div>
+      <div>
+        <p class="detail-label">Disciplines</p>
+        <p class="detail-value">Comedy, Writing, Radio, TV, Podcasting</p>
+      </div>
+      <div>
+        <p class="detail-label">Known for</p>
+        <p class="detail-value">Outland, The Poofcast, Glitter+</p>
+      </div>
+    </div>
+  </div>
+  <div class="about-body reveal">
+    <p>A stand-up comedian since 1997, Adam has performed all over Australia, Britain and the USA. He began his gossip queen career as Triple J's <em>Mister Bitch</em> and spent eight years as <em>The Fabulous Adam Richard</em>, part of Melbourne's FM breakfast team <em>The Matt and Jo Show</em> on 101.9 Fox FM.</p>
+    <p>Adam has appeared as a guest on such embarrassing television ventures as <em>Celebrity Dog School</em>, <em>Celebrity Splash</em>, <em>Hole in the Wall</em> (what is it with all the swimming pools?) and <em>The Footy Show</em>. He has also appeared in more classy fare, like <em>Celebrity Letters and Numbers</em>, <em>Can of Worms</em>, <em>Chelsea Lately</em>, <em>Rove</em> and <em>Tractor Monkeys</em>. He is the co-writer and co-star of the 2012 ABC TV comedy series <em>Outland</em>, about a group of gay science fiction fans. Adam was one of the team captains on the rebooted <em>Spicks and Specks</em>, and a panellist on ABC's <em>Whovians</em>.</p>
+    <p>He is currently based in Sydney, writing, podcasting, and working on whatever comes next.</p>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- WORK -->
+<section id="work">
+  <p class="section-label reveal">Selected Work</p>
+  <h2 class="section-title reveal">Things I've<br><em>made</em></h2>
+
+  <div class="work-grid reveal">
+    <div class="work-item">
+      <p class="work-cat">TV · Writer & Actor</p>
+      <h3 class="work-title">Outland</h3>
+      <p class="work-desc">Co-wrote and starred in this ABC1 comedy series about a group of LGBT sci-fi fans. Still beloved. Still gay. Still nerdy. · 2012</p>
+    </div>
+    <div class="work-item">
+      <p class="work-cat">TV · Senior Writer</p>
+      <h3 class="work-title">Hard Quiz</h3>
+      <p class="work-desc">Nine series as a senior writer on Australia's sharpest quiz show, plus Hard Quiz Kids. · ABC, 2017–2024</p>
+    </div>
+    <div class="work-item">
+      <p class="work-cat">Radio · Presenter</p>
+      <h3 class="work-title">The Matt & Jo Show</h3>
+      <p class="work-desc">A decade as The Fabulous Adam Richard on Melbourne's #1 FM breakfast team. · Fox FM 101.9</p>
+    </div>
+    <div class="work-item">
+      <p class="work-cat">TV · Team Captain</p>
+      <h3 class="work-title">Spicks & Specks</h3>
+      <p class="work-desc">Team captain alongside Ella Hooper on the rebooted ABC music quiz. · 2014</p>
+    </div>
+    <div class="work-item">
+      <p class="work-cat">TV · Panellist</p>
+      <h3 class="work-title">Whovians</h3>
+      <p class="work-desc">Regular panellist on ABC's Doctor Who discussion show, hosted by Rove McManus. · 2017–2020</p>
+    </div>
+    <div class="work-item">
+      <p class="work-cat">Stand-up</p>
+      <h3 class="work-title">Live Comedy</h3>
+      <p class="work-desc">Melbourne International Comedy Festival, Sydney Comedy Festival, Edinburgh Fringe and beyond. · 1997–present</p>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CREDITS -->
+<section id="credits">
+  <p class="section-label reveal">Full Credits</p>
+  <h2 class="section-title reveal">The whole<br><em>lot</em></h2>
+
+  <div class="credits-cols reveal">
+    <div class="credits-col">
+      <h3>Television</h3>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Hard Quiz Kids (S2)</p>
+          <p class="credit-role">Senior Writer · ABC</p>
+        </div>
+        <span class="credit-year">2025</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Hard Quiz (S10)</p>
+          <p class="credit-role">Senior Writer · ABC</p>
+        </div>
+        <span class="credit-year">2024</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Hard Quiz Kids (S1)</p>
+          <p class="credit-role">Senior Writer · ABC</p>
+        </div>
+        <span class="credit-year">2024</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Celebrity Letters & Numbers</p>
+          <p class="credit-role">Guest / Dictionary Corner</p>
+        </div>
+        <span class="credit-year">2021–22</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Whovians (S1–2)</p>
+          <p class="credit-role">Panellist · ABC</p>
+        </div>
+        <span class="credit-year">2017–20</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Spicks & Specks</p>
+          <p class="credit-role">Team Captain · ABC</p>
+        </div>
+        <span class="credit-year">2014</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Outland</p>
+          <p class="credit-role">Creator / Writer / Actor · ABC</p>
+        </div>
+        <span class="credit-year">2012</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Can of Worms</p>
+          <p class="credit-role">Guest</p>
+        </div>
+        <span class="credit-year">2012</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Chelsea Lately</p>
+          <p class="credit-role">Round Table Guest</p>
+        </div>
+        <span class="credit-year">2011</span>
+      </div>
+    </div>
+
+    <div class="credits-col">
+      <h3>Radio</h3>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">The Matt & Jo Show</p>
+          <p class="credit-role">The Fabulous Adam Richard · Fox FM 101.9</p>
+        </div>
+        <span class="credit-year">~10 yrs</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">SA.FM & 92.9 Perth</p>
+          <p class="credit-role">Breakfast Team</p>
+        </div>
+        <span class="credit-year">2010</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Triple J</p>
+          <p class="credit-role">Gossip Segment — Mister Bitch</p>
+        </div>
+        <span class="credit-year">2002–03</span>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Stand-up Shows</h3>
+      <div class="credit-item">
+        <div><p class="credit-name">#FGT</p><p class="credit-role">MICF & Sydney Comedy Festival</p></div>
+        <span class="credit-year">2015</span>
+      </div>
+      <div class="credit-item">
+        <div><p class="credit-name">Gaypocalypse</p><p class="credit-role">MICF & Sydney Comedy Festival</p></div>
+        <span class="credit-year">2014</span>
+      </div>
+      <div class="credit-item">
+        <div><p class="credit-name">Adam Richard "X"</p><p class="credit-role">Adelaide Fringe & MICF</p></div>
+        <span class="credit-year">2007</span>
+      </div>
+      <div class="credit-item">
+        <div><p class="credit-name">The Fabulous Adam Richard</p><p class="credit-role">MICF</p></div>
+        <span class="credit-year">2006</span>
+      </div>
+      <div class="credit-item">
+        <div><p class="credit-name">Bitch</p><p class="credit-role">MICF</p></div>
+        <span class="credit-year">2004</span>
+      </div>
+    </div>
+
+    <div class="credits-col">
+      <h3>Podcasts</h3>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Adam Richard Has a Theory</p>
+          <p class="credit-role">Creator & Host</p>
+        </div>
+        <span class="credit-year">2019–</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">The Poofcast</p>
+          <p class="credit-role">Co-host · Talking Poofy</p>
+        </div>
+        <span class="credit-year">2010–</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">The Shelf</p>
+          <p class="credit-role">Co-host with Justin Hamilton</p>
+        </div>
+        <span class="credit-year">–</span>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Awards & Recognition</h3>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Raw Comedy</p>
+          <p class="credit-role">National Finalist</p>
+        </div>
+        <span class="credit-year">1997</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Moosehead Award</p>
+          <p class="credit-role">Grant Recipient</p>
+        </div>
+        <span class="credit-year">1998</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Outland</p>
+          <p class="credit-role">Award Nomination</p>
+        </div>
+        <span class="credit-year">2012</span>
+      </div>
+      <div class="credit-item">
+        <div>
+          <p class="credit-name">Sydney Gay & Lesbian Mardi Gras</p>
+          <p class="credit-role">Writer · ABC Broadcast</p>
+        </div>
+        <span class="credit-year">2025</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- PODCASTS -->
+<section id="podcasts">
+  <p class="section-label reveal">Podcasts</p>
+  <h2 class="section-title reveal">Something to<br><em>listen to</em></h2>
+
+  <div class="podcast-grid reveal">
+    <div class="podcast-card">
+      <span class="podcast-num">01</span>
+      <p class="podcast-tag">Doctor Who · Since 2019</p>
+      <h3 class="podcast-title">Adam Richard Has a Theory</h3>
+      <p class="podcast-desc">A deep dive into Doctor Who — classic, modern, Big Finish, all of it. Adam watches (or rewatches) stories, has opinions about them, and shares those opinions at length. Over 200 episodes and counting. The Whovians panellist who wouldn't stop talking now has his own podcast. Everyone is very surprised.</p>
+      <a href="https://subscribe.acast.com/adam-richard-has-a-theory" target="_blank" class="podcast-link">Listen now →</a>
+    </div>
+    <div class="podcast-card">
+      <span class="podcast-num">02</span>
+      <p class="podcast-tag">Memoir · Mariah · Ongoing</p>
+      <h3 class="podcast-title">Glitter+</h3>
+      <p class="podcast-desc">Posh (Phillip Lee Curtis) and Fab (Adam Richard) are the Elusive Sham Two. Every week they read a chapter of Mariah Carey's memoir <em>The Meaning of Mariah Carey</em>, dispense Mimi Moments, decide who has to J-Go, and extract a weekly life lesson in Can Take That Away. Essential listening.</p>
+      <a href="https://www.adamrichard.com.au/home/me-i-am-a-memoir-podcast" target="_blank" class="podcast-link">Listen now →</a>
+    </div>
+    <div class="podcast-card">
+      <span class="podcast-num">03</span>
+      <p class="podcast-tag">Comedy · Since 2010</p>
+      <h3 class="podcast-title">The Poofcast</h3>
+      <p class="podcast-desc">Australia's longest-running queer comedy podcast. Adam, Scott Brennan and Toby Sullivan (aka Talking Poofy) have been at it since 2010. Filthy, funny, and still going strong. Previous episodes available from Lipp Media.</p>
+      <a href="https://www.adamrichard.com.au/home/other-podcasts" target="_blank" class="podcast-link">Listen now →</a>
+    </div>
+    <div class="podcast-card">
+      <span class="podcast-num">04</span>
+      <p class="podcast-tag">Newsletter · Monthly</p>
+      <h3 class="podcast-title">Panic Merchant</h3>
+      <p class="podcast-desc">Adam's monthly newsletter. What he's watching, what he's thinking about, what's set him off this month, and occasional dispatches from whatever rabbit hole he's currently in. Free, and worth it.</p>
+      <a href="https://www.adamrichard.com.au/home/newsletter" target="_blank" class="podcast-link">Subscribe →</a>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- STORIES -->
+<section id="stories" style="background: var(--ink);">
+  <p class="section-label reveal">Writing</p>
+  <h2 class="section-title reveal">Stories &<br><em>fiction</em></h2>
+
+  <div style="display:grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 0.5rem;">
+
+    <div class="reveal" style="border-top: 1px solid rgba(184,135,74,0.25); padding-top: 2rem;">
+      <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">Fan Fiction · Doctor Who</p>
+      <h3 style="font-family:var(--serif);font-size:1.6rem;font-weight:300;margin-bottom:1rem;line-height:1.2;">The Doctor & Sarah Jane</h3>
+      <p style="font-size:0.9rem;color:rgba(247,242,235,0.55);line-height:1.8;font-style:italic;">"The Doctor made grandiose but derogatory references to Beethoven and Disraeli, who it's quite possible he may have met, but Sarah Jane very much doubted it… Now he talked to shoes and bananas, sniffed telephones and computers. She'd once seen him have a stand up argument with the TARDIS. The TARDIS had lurched violently at one point, effectively ending the argument, so maybe there was some method in his madness."</p>
+      <a href="https://www.adamrichard.com.au/home/stories" target="_blank" style="display:inline-block;margin-top:1.5rem;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,135,74,0.3);padding-bottom:0.2rem;">Read more →</a>
+    </div>
+
+    <div class="reveal" style="border-top: 1px solid rgba(184,135,74,0.25); padding-top: 2rem;">
+      <p style="font-size:0.6rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:0.75rem;">Short Fiction · 1996 · Outrage Magazine Award Winner</p>
+      <h3 style="font-family:var(--serif);font-size:1.6rem;font-weight:300;margin-bottom:1rem;line-height:1.2;">Tomorrow at Eleven Past Eleven</h3>
+      <p style="font-size:0.9rem;color:rgba(247,242,235,0.55);line-height:1.8;font-style:italic;">"Tomorrow at eleven past eleven, I drop the cup of coffee on the floor. I watch as the almost-full mug splinters apart. I see the coffee explode out of its ruptured container… In eleven minutes I forget I have dropped the cup. I cut my foot on a shard. I watch blood mix with water and milk and sugar and instant coffee."</p>
+      <p style="font-size:0.78rem;color:var(--muted);margin-top:1rem;">Written in 1996 while enrolled in the Professional Writing and Editing course at RMIT. Winner, Outrage Magazine Short Story Competition — Best Short Story by a writer under 25.</p>
+      <a href="https://www.adamrichard.com.au/home/stories" target="_blank" style="display:inline-block;margin-top:1.5rem;font-size:0.68rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--gold);text-decoration:none;border-bottom:1px solid rgba(184,135,74,0.3);padding-bottom:0.2rem;">Read more →</a>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div>
+    <p class="section-label reveal">Contact</p>
+    <h2 class="section-title reveal">Let's make<br>something <em>together</em></h2>
+    <p class="contact-intro reveal">Bookings, collaborations, writing commissions, general enquiries and fan mail all welcome. (Hate mail less so, but Adam's read it all before.)</p>
+    <div class="contact-links reveal">
+      <a href="/cdn-cgi/l/email-protection#a3d7cbc6ccd1dae3c2c7c2ced1cac0cbc2d1c78dc0ccce8dc2d6" class="contact-link">
+        <span class="contact-link-label">Email</span>
+        <span class="contact-link-value"><span class="__cf_email__" data-cfemail="32465a575d404b725356535f405b515a5340561c515d5f1c5347">[email&#160;protected]</span></span>
+      </a>
+      <a href="https://linktr.ee/adamrichard" target="_blank" class="contact-link">
+        <span class="contact-link-label">Links</span>
+        <span class="contact-link-value">linktr.ee/adamrichard</span>
+      </a>
+      <a href="https://www.facebook.com/FabulousAdamRichard" target="_blank" class="contact-link">
+        <span class="contact-link-label">Facebook</span>
+        <span class="contact-link-value">@FabulousAdamRichard</span>
+      </a>
+    </div>
+  </div>
+  <div>
+    <form class="contact-form reveal" id="contact-form">
+      <div class="form-group">
+        <label class="form-label">Name</label>
+        <input type="text" name="name" class="form-input" placeholder="Your name" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email</label>
+        <input type="email" name="email" class="form-input" placeholder="your@email.com" required>
+      </div>
+      <div class="form-group">
+        <label class="form-label">What's this about?</label>
+        <input type="text" name="subject" class="form-input" placeholder="Booking / collaboration / other">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea name="message" class="form-textarea" rows="5" placeholder="Tell me more…" required></textarea>
+      </div>
+      <button type="submit" class="btn btn-gold">Send message →</button>
+      <p id="form-msg" style="font-size:0.8rem;color:var(--gold-light);display:none;margin-top:0.5rem;"></p>
+    </form>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <span class="footer-name">Adam Richard</span>
+  <span class="footer-copy">© 2026 · All rights reserved · adamrichard.com.au</span>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 80);
+        observer.unobserve(e.target);
+      }    });
+  }, { threshold: 0.02, rootMargin: '0px 0px -10px 0px' });
+  reveals.forEach(el => observer.observe(el));
+  setTimeout(() => reveals.forEach(el => el.classList.add('visible')), 1500);
+
+  // Formspree contact form
+  // 1. Sign up free at formspree.io
+  // 2. Create a new form — they'll give you an ID like "xabcd1234"
+  // 3. Replace YOUR_FORM_ID below with that ID
+  const FORMSPREE_ID = 'xyknzjkp';
+
+  const form = document.getElementById('contact-form');
+  const msg = document.getElementById('form-msg');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const btn = form.querySelector('button[type="submit"]');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    try {
+      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
+        method: 'POST',
+        headers: { 'Accept': 'application/json' },
+        body: new FormData(form)
+      });
+
+      if (res.ok) {
+        msg.textContent = 'Message sent! Adam will be in touch.';
+        msg.style.color = 'var(--gold-light)';
+        form.reset();
+      } else {
+        msg.textContent = 'Something went wrong — please email theory@adamrichard.com.au directly.';
+        msg.style.color = '#e07070';
+      }
+    } catch {
+      msg.textContent = 'Something went wrong — please email theory@adamrichard.com.au directly.';
+      msg.style.color = '#e07070';
+    }
+
+    msg.style.display = 'block';
+    btn.textContent = 'Send message →';
+    btn.disabled = false;
+  });
+</script>
+</body>
+</html>
